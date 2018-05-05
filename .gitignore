@@ -44,3 +44,5 @@ libskeleton_fortran.hxx
 *.so
 locales/en_US/
 locales/fr_FR/
+demos/
+macros/lib

@@ -17,21 +17,24 @@ function [] = ias_graficos(varargin);
     ds = real(y.dados);
     n = y.params(3);
     
-    subplot(2,2,1);
+    subplot(3,1,1);
     plot2d(ts',ds');
     xtitle('Sinal','Tempo (s)','Amplitude')
+    xgrid();
     
-    subplot(2,2,2);
+    subplot(3,1,2);
     dft = y.dft(:,1:ceil(n/2)); 
     plot2d(fs(1:ceil(n/2))', abs(dft)',logflag="nl");
     xtitle('','Frequência (Hz)', 'Magnitude (dB)');
+    xgrid();
     
     S  = y.specg{1};
     ts = y.specg{2};
     fs = y.specg{3};
     
-    subplot(2,2,3)
+    subplot(3,1,3)
     grayplot(ts,fs,log(abs(S)));
+    xtitle('Espectrograma','Tempo (s)','Frequência (Hz)');
     
     mapa = flipdim(rainbowcolormap(floor(length(fs)/2)),1);
     mapa0 = get(gcf(),'color_map');

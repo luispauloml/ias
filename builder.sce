@@ -17,7 +17,7 @@ function main_builder()
     try
         v = getversion("scilab");
     catch
-        error(gettext("Scilab 5.3 or more is required."));
+        error(gettext("Scilab 6 or more is required."));
     end
 
     if v(1) < 6  then
