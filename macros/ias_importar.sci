@@ -9,7 +9,7 @@ function y = ias_importar(varargin)
         if (type(varargin(1)) <> 10) then
             error("ias_importar: 1 argumento: dever ser o caminho para um arquivo WAV.");
         else
-            [ds, f_s, bits] = wavread(varargin(1));
+            [ds, Fs, bits] = wavread(varargin(1));
 
         end
     
@@ -18,18 +18,20 @@ function y = ias_importar(varargin)
         ds = real(varargin(1));
         
         //verificar se é vetor
-        if (size(ds,'r') <> 1 & size(ds,'c') <> 1) then
+        if (length(ds) == 0) then
+            warning("ias_importar: dados vazios");
+        elseif (size(ds,'r') <> 1 & size(ds,'c') <> 1) then
             warning("ias_importar: apenas a primeira linha será adquirida");
             ds = ds(1,:);
         elseif (size(ds,'r') <> 1) then
-            ds = ds';
+            ds = ds.';
         end
         
         select varargin(2)
         case 'f'
-            f_s  = varargin(3);
+            Fs  = varargin(3);
         case 't'
-            f_s = (length(ds)-1)/varargin(3);
+            Fs = (length(ds)-1)/varargin(3);
         else
             error("ias_importar: 2o argumento deve ser string: ''f'' ou ''t''");
         end
@@ -41,11 +43,11 @@ function y = ias_importar(varargin)
     y = ias_novo();
     
     n = length(ds);
-    t_max = (n-1)/f_s;
-    ts = 0:1/f_s:t_max;
+    t_max = (n-1)/Fs;
+    ts = 0:1/Fs:t_max;
     
     y.tempo = ts;
-    y.dados = ds;
-    y.params = [f_s, t_max, n];
+    y.dados = ds;    
+    y.params = [Fs, t_max, n];
     
 endfunction

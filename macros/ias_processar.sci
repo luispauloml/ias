@@ -13,11 +13,11 @@ function varargout = ias_processar(varargin)
         [S,ts,fs] = ias_processar(y,'spec');
         y.specg   = {S, ts, fs};
         
-        f_s   = ias_extrair(y,'f');
+        Fs    = ias_extrair(y,'f');
         t_max = ias_extrair(y,'t');
         n     = ias_extrair(y,'n');
         
-        fs      = 0:1/t_max:f_s;
+        fs      = 0:1/t_max:Fs;
         y.freqs = fs(1:n);
         
         varargout = list(y);

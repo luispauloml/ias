@@ -9,7 +9,7 @@ function varargout = ias_extrair(varargin)
     
     ias_guard(y);
     
-    valores = ['f', 't', 'n', 'd', 'dft', 'spec'];
+    valores = ['f', 't', 'n', 'd', 'dft', 'spec', 'tm', 'fm'];
    
     select param
     case valores(1) //frequência de aquisição 
@@ -29,6 +29,12 @@ function varargout = ias_extrair(varargin)
         
     case valores(6) //espectigrama
         varargout = list(y.specg{1}, y.specg{2}, y.specg{3});
+        
+    case valores(7) //matriz de tempo
+        varargout = list(y.tempo);
+        
+    case valores(8) //matriz de frequências
+        varargout = list(y.freqs);
     
     else
         msg = "ias_extrari: 2o argumento deve ser um string: "

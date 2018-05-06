@@ -1,8 +1,8 @@
 function y = ias_reamostrar(y,ts)
     ias_guard(y);
     
-    ts_antigo = y.tempo;
-    dados_antigo = y.dados;
+    ts_antigo = ias_extrair(y,'tm');
+    dados_antigo = ias_extrair(y,'d');
     
     ts_novo = [];
     dados_novo = [];
@@ -19,9 +19,9 @@ function y = ias_reamostrar(y,ts)
     y.dados = dados_novo;
     y.tempo = ts_novo;
     
-    f_s = 1/diff(ts_novo(1:2));
+    Fs = 1/(ts_novo(2) - ts_novo(1));
     t_max = ts_novo($);
     n = length(ts_novo);
     
-    y.params = [f_s, t_max, n];
+    y.params = [Fs, t_max, n];
 endfunction

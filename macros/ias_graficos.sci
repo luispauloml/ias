@@ -8,14 +8,15 @@ function [] = ias_graficos(varargin);
         scf();
     case 2
         scf(varargin(2));
+        clf();
     else
-        error("ias_graficos : devem ser dois argumentos: dados e manipulador de figura");
+        error("ias_graficos: esperava-se 1 ou 2 argumentos: dados e manipulador de figura");
     end
     
-    ts = y.tempo;
-    fs = y.freqs
-    ds = real(y.dados);
-    n = y.params(3);
+    ts = ias_extrair(y,'tm');   //matriz de tempo
+    fs = ias_extrair(y,'fm');   //matriz de frequências
+    ds = ias_extrair(y,'d');    //dados
+    n  = ias_extrair(y,'n');    //número de pontos
     
     subplot(3,1,1);
     plot2d(ts',ds');
@@ -28,17 +29,14 @@ function [] = ias_graficos(varargin);
     xtitle('','Frequência (Hz)', 'Magnitude (dB)');
     xgrid();
     
-    S  = y.specg{1};
-    ts = y.specg{2};
-    fs = y.specg{3};
+    [S, ts, fs]  = ias_extrair(y,'spec');
     
     subplot(3,1,3)
     grayplot(ts,fs,log(abs(S)));
     xtitle('Espectrograma','Tempo (s)','Frequência (Hz)');
     
     mapa = flipdim(rainbowcolormap(floor(length(fs)/2)),1);
-    mapa0 = get(gcf(),'color_map');
     
     xname("Fig. %d: Análise de sinais");
-    set(gcf(),"color_map",[[0 0 1]; mapa0(3:8,:); mapa(9:size(mapa,'r'),:)]);
+    set(gcf(),"color_map",[[0 0 1]; mapa(2:$,:)]);
 end
