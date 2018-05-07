@@ -60,7 +60,13 @@ function varargout = ias_specgram(x,Fs)
     wind = window('hm',n);
     pace = n - ceil(n/2);
     
-    timebins = 1:pace:length(x);
+    Np = length(x);
+    timebins = 1:pace:Np;
+    
+    //para números ímpares
+    if ~modulo(Np,2) then
+        timebins = [timebins Np];
+    end
     
     S = zeros(length(timebins)-2,n-1);
     
