@@ -2,7 +2,7 @@
 function [] = %IASSTRUCT_p (y)
     str = [];
     k = 1;
-    str(k) = sprintf("Objecto para análise de sinais:\n");
+    str(k) = sprintf("Objeto para análise de sinais:\n");
     k = k + 1;
     str(k) = sprintf("==================");
     k = k + 1;
@@ -13,8 +13,8 @@ function [] = %IASSTRUCT_p (y)
     str(k) = sprintf("Número de pontos : %s", string(ias_extrair(y,'n')));
     k = k + 1; tmp = ias_extrair(y,'d');
     str(k) = sprintf("Dados : [%sx%s]", string(size(tmp,'r')), string(size(tmp,'c')));
-    k = k + 1; temp = ias_extrair(y,'dft');
-    str(k) = sprintf("DFT : [%sx%s]", string(size(temp,'r')), string(size(tmp,'c')));
+    k = k + 1; tmp = ias_extrair(y,'dft');
+    str(k) = sprintf("DFT : [%sx%s]", string(size(tmp,'r')), string(size(tmp,'c')));
     k = k + 1;
     str(k) = sprintf("Espectrograma : %s\n", string(y.specg));
     

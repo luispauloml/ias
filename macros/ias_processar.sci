@@ -63,8 +63,8 @@ function varargout = ias_specgram(x,Fs)
     Np = length(x);
     timebins = 1:pace:Np;
     
-    //para números ímpares
-    if ~modulo(Np,2) then
+    //para números ímpares e quantidade menor que 1.5*256
+    if (~modulo(Np,2) & n <= 1.5*256) then
         timebins = [timebins Np];
     end
     
@@ -85,3 +85,4 @@ function varargout = ias_specgram(x,Fs)
     
     varargout = list(S,ts,fs);
 endfunction
+
