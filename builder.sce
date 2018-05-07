@@ -42,6 +42,16 @@ function main_builder()
     //tbx_builder_help(toolbox_dir);
     tbx_build_loader(toolbox_dir);
     //tbx_build_cleaner(toolbox_dir);
+    
+    
+    //Carregar %IASSTRUCT_p do arquivo .SCI
+    txt = mgetl(toolbox_dir + 'loader.sce');
+    txt = [txt;...
+          'root_tlbx = get_absolute_file_path(''loader.sce'')';...
+          'exec(root_tlbx + ''macros/%IASSTRUCT_p.sci'',-1);';...
+          'clear root_tlbx;'];
+       
+    mputl(txt,toolbox_dir + 'loader.sce');
 
 endfunction
 // =============================================================================

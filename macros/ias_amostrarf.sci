@@ -6,10 +6,13 @@ function y1 = ias_amostrarf(y,lf)
     tipos = [11 13 14 130];
     if (type(lf) == 15) then
         if or( type(lf(1)) == tipos ) then
-            func = lf(1);
             args = list(lf(2:$));
+            
+            function a = func(t)
+                a = lf(1)(t,args(:));
+            endfunction
         else
-            error("ias_amostrarf: o primeiro elemento de lf deve ser uma função.");
+            error("ias_amostrarf: o primeiro elemento da lista deve ser uma função.");
         end
     else
         if or( type(lf) == tipos ) then
@@ -23,17 +26,12 @@ function y1 = ias_amostrarf(y,lf)
     //obter matriz de tempo para amostragem
     ts = ias_extrair(y,'tm');
     
-    if (length(args) > 0) then
-        //se for lista de funções
-        dados_novo = func(ts,args(:));
-    else
-        //se for função pura
-        dados_novo = feval(ts,func);
-    end
+    //avalia a função
+    dados_novo = feval(ts,func);
     
     //cria novo objeto
     Fs = ias_extrair(y,'f');
-    y1 = ias_importar(dados_novo,'f',Fs);
+    y1 = ias_vec(dados_novo,'f',Fs);
 endfunction
 
 

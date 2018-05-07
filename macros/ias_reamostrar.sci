@@ -16,12 +16,6 @@ function y = ias_reamostrar(y,ts)
         end
     end
     
-    y.dados = dados_novo;
-    y.tempo = ts_novo;
+    y = ias_vec(dados_novo,'f',Fs);
     
-    Fs = 1/(ts_novo(2) - ts_novo(1));
-    t_max = ts_novo($);
-    n = length(ts_novo);
-    
-    y.params = [Fs, t_max, n];
 endfunction
